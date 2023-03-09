@@ -13,24 +13,25 @@ img {margin-bottom: -7px}
 .w3-row-padding img {margin-bottom: 12px}
 </style>
 </head>
-<body>
+<body style="background-color: black;">
 
 <!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+<nav class="w3-sidebar w3-bar-block w3-black w3-collapse w3-top w3-padding-large" style="z-index:3;width:250px" id="mySidebar">
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-    <h3 class="w3-wide"><b>It's Art Time</b></h3>
+    <a href="../index.html"><h3 class="w3-wide"><b>It's Art Time</b></h3></a>
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-    <a onclick="yearfunc_a()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+    <a onclick="yearfunc_a()" href="javascript:void(0)" class="w3-button w3-block w3-black w3-left-align" id="myBtn">
       2023 <i class="fa fa-caret-down"></i>
     </a>
     <div id="AccA" class="w3-bar-block w3-hide w3-padding-large w3-medium">
       <a href="../pages/2023_jan.html" class="w3-bar-item w3-button">January</a>
       <a href="../pages/2023_feb.html" class="w3-bar-item w3-button">February</a>
+      <a href="../pages/2023_mar.html" class="w3-bar-item w3-button">March</a>
     </div>
     <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-      <a onclick="yearfunc_b()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+      <a onclick="yearfunc_b()" href="javascript:void(0)" class="w3-button w3-block w3-black w3-left-align" id="myBtn">
         2022 <i class="fa fa-caret-down"></i>
       </a>
       <div id="AccB" class="w3-bar-block w3-hide w3-padding-large w3-medium">
@@ -49,27 +50,25 @@ img {margin-bottom: -7px}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-content" style="max-width:1200px">
+<div class="w3-content" style="max-width:1500px">
 
     <!-- Push down content on small screens -->
     <div class="w3-hide-large" style="margin-top:83px"></div>
   
 <!-- Header -->
 <div class="w3-opacity">
-<span class="w3-button w3-xxlarge w3-white w3-right" onclick="w3_open()"></span> 
 <div class="w3-clear"></div>
-<header class="w3-center w3-margin-bottom">
-  <h1><b>February Drawing Challenge</b></h1>
-  <p><b>deez nuts</b></p>
-  <p class="w3-padding-16"><button class="w3-button w3-black" onclick="myFunction()">Toggle Grid Padding</button></p>
-</header>
-</div>
+  <header class="w3-center w3-margin-bottom">
+    <h1 style="color: white"><b>January Drawing Challenge</b></h1>
+    <p style="color: white;"><b>deez nuts</b></p>
+  </header>
+  </div>
 
 <!-- Photo Grid -->
-<div class="w3-row" id="myGrid" style="margin-bottom:128px">
+<div class="w3-row-padding" id="myGrid" style="margin-bottom:128px">
   <div class="w3-third">
     <header class="w3-center w3-margin-bottom">
-        <p><b>society</b></p>
+      <p style="color: white;"><b>society</b></p>
     </header>
     <img src="../images/2023/january/society/week 1 - subaru.png" alt="subaru week 1" style="width:100%">
     <img src="../images/2023/january/society/week 2 - kiara.jpg" alt="kiara week 2" style="width:100%">
@@ -79,7 +78,7 @@ img {margin-bottom: -7px}
 
   <div class="w3-third">
     <header class="w3-center w3-margin-bottom">
-        <p><b>wadini</b></p>
+      <p style="color: white;"><b>wadini</b></p>
     </header>
     <img src="../images/2023/january/wadini/berd.png" alt="berd week 1" style="width:100%">
     <img src="../images/2023/january/wadini/magnus bride.png" alt="magnus bride week 2" style="width:100%">
@@ -89,7 +88,7 @@ img {margin-bottom: -7px}
 
   <div class="w3-third">
     <header class="w3-center w3-margin-bottom">
-        <p><b>Mr Requiem</b></p>
+      <p style="color: white;"><b>Mr Requiem</b></p>
     </header>
     <img src="../images/2023/january/mrrequiem/berd.png" alt="berd week 1" style="width:100%">
     <img src="../images/2023/january/mrrequiem/zebra.png" alt="zebra week 2" style="width:100%">
@@ -107,18 +106,6 @@ img {margin-bottom: -7px}
   <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
 </footer>
  
-<script>
-// Toggle grid padding
-function myFunction() {
-  var x = document.getElementById("myGrid");
-  if (x.className === "w3-row") {
-    x.className = "w3-row-padding";
-  } else { 
-    x.className = x.className.replace("w3-row-padding", "w3-row");
-  }
-}
-</script>
-
 <script>
   // 2023 Sidebar
   function yearfunc_a() {
