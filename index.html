@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Drawing Challenge Portfolio</title>
@@ -20,32 +19,7 @@
   </style>
 </head>
 <body style="background-color: black;">
-
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-bar-block w3-black w3-collapse w3-top w3-padding-large" style="z-index:3;width:225px" id="mySidebar">
-  <div class="w3-container w3-display-container w3-padding-16">
-    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-    <a href="index.html"><h3 class="w3-wide"><b>It's Art Time</b></h3></a>
-  </div>
-  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-    <a onclick="yearfunc_a()" href="javascript:void(0)" class="w3-button w3-block w3-black w3-left-align" id="myBtn">
-      2023 <i class="fa fa-caret-down"></i>
-    </a>
-    <div id="AccA" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-      <a href="pages/2023_jan.html" class="w3-bar-item w3-button w3-center">January</a>
-      <a href="pages/2023_feb.html" class="w3-bar-item w3-button w3-center">February</a>
-      <a href="pages/2023_mar.html" class="w3-bar-item w3-button">March</a>
-    </div>
-    <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-      <a onclick="yearfunc_b()" href="javascript:void(0)" class="w3-button w3-block w3-black w3-left-align" id="myBtn">
-        2022 <i class="fa fa-caret-down"></i>
-      </a>
-      <div id="AccB" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-        <a href="pages/2022_oct.html" class="w3-bar-item w3-button w3-center">October</a>
-      </div>
-  </div>
-</nav>
-
+ 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
   <div class="w3-bar-item w3-padding-24 w3-wide">It's Art Time</div>
@@ -66,17 +40,19 @@
 <div class="w3-clear"></div>
 <header class="w3-center w3-margin-bottom">
   <h1 style="color: white"><b>Homepage</b></h1>
-  <p style="color: white;"><b>deez nuts</b></p>
+  <a href="pages/2023_mar.html"><p style="color: white;"><b>Drawing Challenge Archive</p></b></a>
   <p class="w3-padding-16"><button class="w3-button w3-white" onclick="get_random_image()">Random Image</button></p>
 </header>
 </div>
 
-<!--<img src="images/2023/january/society/week 1 - subaru.png" alt="subaru week 1" style="width:100%">-->
 
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin-top:128px"> 
-  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-</footer>
+<div class="container">
+  <div class="inner_container">
+    <img id="image_shower", alt="Could not load image", class="center", style="width:50%"/>
+  </div>
+</div>
+
+<!--<img src="images/2023/january/society/week 1 - subaru.png" alt="subaru week 1" style="width:100%">-->
 
 <script>
   // 2023 Sidebar
