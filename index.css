@@ -42,8 +42,8 @@ img{
 }
 
 button{
-  width: 25%;
-  height: 90%;
+  width: 300px;
+  height: 100%;
 
   font-size: 20px;
   color: white;
@@ -58,14 +58,7 @@ button{
 button:hover{
   transition: 0.05s;
   background-color: #000;
-  transform: rotateZ(-10deg);
   box-shadow: 0 0 30px -10px #000;
-}
-
-button:active{
-  transform: translateY(20px);
-  transform: rotateZ(10deg);
-
 }
 
 .container {
