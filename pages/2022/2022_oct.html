@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Drawing Challenge Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1 {font-family: "Montserrat", sans-serif}
+img {margin-bottom: -7px}
+.w3-row-padding img {margin-bottom: 12px}
+</style>
+</head>
+<body style="background-color: black;">
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-collapse w3-top w3-padding-large" style="z-index:3;width:225px" id="mySidebar">
+  <div class="w3-container w3-display-container w3-padding-16">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+    <a href="../index.html"><h3 class="w3-wide"><b>It's Art Time</b></h3></a>
+  </div>
+  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <a onclick="yearfunc_a()" href="javascript:void(0)" class="w3-button w3-block w3-black w3-left-align" id="myBtn">
+      2023 <i class="fa fa-caret-down"></i>
+    </a>
+    <div id="AccA" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+      <a href="../../pages/2023/2023_jan.html" class="w3-bar-item w3-button">January</a>
+      <a href="../../pages/2023/2023_feb.html" class="w3-bar-item w3-button">February</a>
+      <a href="../../pages/2023/2023_mar.html" class="w3-bar-item w3-button">March</a>
+      <a href="../../pages/2023/2023_apr.html" class="w3-bar-item w3-button">April</a>
+      <a href="../../pages/2023/2023_may.html" class="w3-bar-item w3-button">May</a>
+      <a href="../../pages/2023/2023_jun.html" class="w3-bar-item w3-button">June</a>
+      <a href="../../pages/2023/2023_jul.html" class="w3-bar-item w3-button">July</a>
+      <a href="../../pages/2023/2023_aug.html" class="w3-bar-item w3-button">August</a>
+      <a href="../../pages/2023/2023_sep.html" class="w3-bar-item w3-button">September</a>
+      <a href="../../pages/2023/2023_oct.html" class="w3-bar-item w3-button">October</a>
+      <a href="../../pages/2023/2023_nov.html" class="w3-bar-item w3-button">November</a>
+      <a href="../../pages/2023/2023_dec.html" class="w3-bar-item w3-button">December</a>
+    </div>
+    <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+      <a onclick="yearfunc_b()" href="javascript:void(0)" class="w3-button w3-block w3-black w3-left-align" id="myBtn">
+        2022 <i class="fa fa-caret-down"></i>
+      </a>
+      <div id="AccB" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+        <a href="../../pages/2022_oct.html" class="w3-bar-item w3-button">October</a>
+      </div>
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+  <div class="w3-bar-item w3-padding-24 w3-wide">It's Art Time</div>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+  
+  <!-- Header -->
+  <div class="w3-opacity">
+  <div class="w3-clear"></div>
+  <header class="w3-center w3-margin-bottom">
+    <h1 style="color: white"><b>October Drawing Challenge</b></h1>
+    <p style="color: white;"><b>A different prompt each day</b></p>
+  </header>
+  </div>
+
+  <!-- Photo Grid -->
+  <div class="w3-row-padding" id="myGrid" style="margin-bottom:128px">
+    <div class="w3-third">
+      <header class="w3-center w3-margin-bottom">
+        <p style="color: white;"><b>society</b></p>
+      </header>
+      <img src="../../images/2022/october/society/day 1 pochita.jpg" alt="pochita day 1" style="width:100%">
+      <img src="../../images/2022/october/society/day 2 sputter and flare .png" alt="sputter and flare day 2" style="width:100%">
+      <img src="../../images/2022/october/society/day 3 yuu.png" alt="yuu day 3" style="width:100%">
+      <img src="../../images/2022/october/society/day 4 rhitta.gif" alt="rhitta day 4" style="width:100%">
+      <img src="../../images/2022/october/society/day 5 historia.jpg" alt="historia day 5" style="width:100%">
+      <img src="../../images/2022/october/society/day 6 touko.jpg" alt="touko day 6" style="width:100%">
+      <img src="../../images/2022/october/society/day 7 shouko.gif" alt="shouko day 7" style="width:100%">
+      <img src="../../images/2022/october/society/day 8 birb.gif" alt="birb day 8" style="width:100%">
+      <img src="../../images/2022/october/society/day 9 aot blade big.gif" alt="aot blade day 9" style="width:100%">
+      <img src="../../images/2022/october/society/day 10 picture.jpg" alt="aot port day 10" style="width:100%">
+      <img src="../../images/2022/october/society/day 11 gilbert.jpg" alt="gilbert day 11" style="width:100%">
+      <img src="../../images/2022/october/society/day 12 lelouch.jpg" alt="lelouch day 12" style="width:100%">
+      <img src="../../images/2022/october/society/day 13 caitlin.jpg" alt="caitlin day 13" style="width:100%">
+      <img src="../../images/2022/october/society/day 14 misaki.jpg" alt="misaki day 14" style="width:100%">
+      <img src="../../images/2022/october/society/day 15 clara.gif" alt="clara day 15" style="width:100%">
+      <img src="../../images/2022/october/society/day 16 reg.gif" alt="reg day 16" style="width:100%">
+      <img src="../../images/2022/october/society/day 17 yuuko.gif" alt="yuuko day 17" style="width:100%">
+      <img src="../../images/2022/october/society/day 18 matamune.jpg" alt="matamune day 18" style="width:100%">
+      <img src="../../images/2022/october/society/day 19 pingu.gif" alt="pingu day 19" style="width:100%">
+      <img src="../../images/2022/october/society/day 20 narrarator.jpg" alt="narrarator day 20" style="width:100%">
+      <img src="../../images/2022/october/society/day 21 captain mizuki.jpg" alt="captain mizuki day 21" style="width:100%">
+      <img src="../../images/2022/october/society/day 22 pt 1 kaguya.jpg" alt="kaguya day 22" style="width:100%">
+      <img src="../../images/2022/october/society/day 22 pt 2 miyuki.jpg" alt="miyuki day 22" style="width:100%">
+      <img src="../../images/2022/october/society/day_23_rudeus.gif" alt="rudeus day 23" style="width:100%">
+      <img src="../../images/2022/october/society/day 24 light yagami.jpg" alt="light yagami day 24" style="width:100%">
+      <img src="../../images/2022/october/society/day 25 asobi_hanako.gif" alt="asobi hanako day 25" style="width:100%">
+      <img src="../../images/2022/october/society/day 26 escanor.jpg" alt="escanor day 26" style="width:100%">
+      <img src="../../images/2022/october/society/day 27 takaki.jpg" alt="takaki day 27" style="width:100%">
+      <!--<img src="../images/2022/october/society/day 28" alt="day 28" style="width:100%">-->
+      <img src="../../images/2022/october/society/day 29 maqiua.jpg" alt="maqiua day 29" style="width:100%">
+    </div>
+    
+    <div class="w3-third">
+      <header class="w3-center w3-margin-bottom">
+        <p style="color: white;"><b>wadini</b></p>
+      </header>
+      <img src="../../images/2022/october/wadini/pumpkin.png" alt="pumpkin day 2" style="width:100%">
+      <img src="../../images/2022/october/wadini/raphtalia.png" alt="raphtalia day 3" style="width:100%">
+      <img src="../../images/2022/october/wadini/ghost.png" alt="neeko day 3" style="width:100%">
+      <img src="../../images/2022/october/wadini/leaves.png" alt="neeko day 5" style="width:100%">
+      <img src="../../images/2022/october/wadini/vaporean.png" alt="neeko day 5" style="width:100%">
+      <img src="../../images/2022/october/wadini/candy.png" alt="neeko day 5" style="width:100%">
+      <img src="../../images/2022/october/wadini/maid sama.png" alt="neeko day 6" style="width:100%">
+      <img src="../../images/2022/october/wadini/ghibli.png" alt="neeko day 7" style="width:100%">
+      <img src="../../images/2022/october/wadini/tea.png" alt="neeko day 12" style="width:100%">
+      <img src="../../images/2022/october/wadini/tokyo ghoul.png" alt="neeko day 9" style="width:100%">
+      <img src="../../images/2022/october/wadini/orange.png" alt="neeko day 11" style="width:100%">
+      <img src="../../images/2022/october/wadini/blue spring ride.png" alt="neeko day 14" style="width:100%">
+      <img src="../../images/2022/october/wadini/fruits basket.png" alt="neeko day 27" style="width:100%">
+    </div>
+
+    <div class="w3-third">
+      <header class="w3-center w3-margin-bottom">
+        <p style="color: white;"><b>Mr Requiem</b></p>
+      </header>
+      <img src="../../images/2022/october/mrrequiem/lucy.png" alt="lucy day 1" style="width:100%">
+      <img src="../../images/2022/october/mrrequiem/mob.png" alt="mob day 2" style="width:100%">
+      <img src="../../images/2022/october/mrrequiem/ahri.png" alt="ahri day 3" style="width:100%">
+    </div>
+  </div>
+
+  <!-- End Page Content -->
+  </div>
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin-top:128px"> 
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  </footer>
+ 
+<script>
+// Toggle grid padding
+function myFunction() {
+  var x = document.getElementById("myGrid");
+  if (x.className === "w3-row") {
+    x.className = "w3-row-padding";
+  } else { 
+    x.className = x.className.replace("w3-row-padding", "w3-row");
+  }
+}
+</script>
+
+<script>
+  // 2023 Sidebar
+  function yearfunc_a() {
+    var x = document.getElementById("AccA");
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+  
+  document.getElementById("myBtn").click();
+  
+  
+  // Open and close sidebar
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+  }
+   
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+  }
+  </script>
+  
+<script>
+  // 2022 Sidebar 
+  function yearfunc_b() {
+    var x = document.getElementById("AccB");
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+  
+  document.getElementById("myBtn").click();
+    
+  // Open and close sidebar
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+  }
+    
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+  }
+  </script>
+
+</body>
+</html>
