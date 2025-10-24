@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Signal Controller</title>
+<style>
+  :root {
+    --transition-time: 0.3s;
+  }
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color var(--transition-time);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+  }
+  button {
+    padding: 20px 35px;
+    font-size: 20px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.1s ease, border-color 0.2s ease;
+    background-color: black;
+    color: white;
+  }
+  button:active {
+    transform: scale(0.95);
+  }
+  .selected {
+    border-color: white;
+  }
+  #status {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <div id="status">OFF</div>
+  <div class="controls">
+    <button id="redBtn" onclick="setColor('red')">Red</button>
+    <button id="yellowBtn" onclick="setColor('yellow')">Yellow</button>
+    <button id="offBtn" onclick="setColor('black')">Off</button>
+  </div>
+  <div class="controls">
+    <button id="seqA" onclick="playSequence(['red','yellow','black'], 500)">Sequence A (Red → Yellow → Off)</button>
+    <button id="seqB" onclick="playSequence(['yellow','red','black'], 500)">Sequence B (Yellow → Red → Off)</button>
+  </div>
+
+  <script>
+    let currentColor = "black";
+
+    function clearHighlights() {
+      document.querySelectorAll("button").forEach(btn => btn.classList.remove("selected"));
+    }
+
+    function setColor(color) {
+      document.body.style.backgroundColor = color;
+      currentColor = color;
+      document.getElementById("status").textContent = color.toUpperCase();
+      clearHighlights();
+      if (color === "red") document.getElementById("redBtn").classList.add("selected");
+      else if (color === "yellow") document.getElementById("yellowBtn").classList.add("selected");
+    }
+
+    function playSequence(sequence, interval) {
+      let i = 0;
+      setColor(sequence[i]);
+      const seqInterval = setInterval(() => {
+        i++;
+        if (i < sequence.length) {
+          setColor(sequence[i]);
+        } else {
+          clearInterval(seqInterval);
+        }
+      }, interval);
+    }
+
+    // Optional tap toggle between red/yellow
+    document.body.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") return; // ignore button clicks
+      if (currentColor === "red") setColor("yellow");
+      else if (currentColor === "yellow") setColor("red");
+      else setColor("red");
+    });
+  </script>
+</body>
+</html>
