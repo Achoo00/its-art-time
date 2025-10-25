@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Block Gradient</title>
+    <style>
+        body { 
+            background: #121212; 
+            color: #eee; 
+            font-family: 'Arial', sans-serif; 
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+        .controls {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        label {
+            margin: 0 10px;
+            color: #ccc;
+        }
+        input[type="color"] {
+            width: 50px;
+            height: 30px;
+            border: none;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-right: 15px;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background: #2a2a2a;
+            color: #fff;
+            text-align: center;
+        }
+        button {
+            background: #3a7bd5;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2c5fb3;
+        }
+        #gradient {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .gradient-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            width: 140px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .color-box {
+            width: 100%;
+            height: 80px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        .block-name {
+            font-size: 0.9em;
+            color: #ccc;
+            margin: 5px 0;
+        }
+        .hex-code {
+            font-family: monospace;
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 5px;
+        }
+        .block-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .block-swatch {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: help;
+            transition: all 0.2s ease;
+            z-index: 1;
+        }
+        .block-swatch:hover {
+            transform: scale(1.15);
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+        .block-swatch::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            transform: translateX(-50%) translateY(-5px);
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .block-swatch:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Minecraft Block Gradient</h1>
+    <div class="controls">
+        <label>Start: <input type="color" id="start" value="#3a7bd5"></label>
+        <label>End: <input type="color" id="end" value="#fcdc4a"></label>
+        <label>Steps: <input type="number" id="steps" value="5" min="2" max="20"></label>
+        <button onclick="createGradient()">Generate</button>
+    </div>
+    <div id="gradient"></div>
+
+    <script>
+        const blocks = [
+            { name: 'Stone', color: '#7d7d7d' },
+            { name: 'Grass Block', color: '#6a8a3a' },
+            { name: 'Sand', color: '#d8c586' },
+            { name: 'Oak Planks', color: '#b38c5a' },
+            { name: 'Water', color: '#3c67b2' },
+            { name: 'Lapis Block', color: '#25468c' },
+            { name: 'Red Wool', color: '#b02e26' },
+            { name: 'Gold Block', color: '#fcdc4a' },
+            { name: 'Dirt', color: '#8c5e2f' },
+            { name: 'Bricks', color: '#9e3a3a' },
+            { name: 'Diamond Block', color: '#4aada9' },
+            { name: 'Emerald Block', color: '#00a94f' },
+            { name: 'Netherrack', color: '#6e1800' },
+            { name: 'Nether Brick', color: '#2d1e1e' },
+            { name: 'End Stone', color: '#e5e5b7' },
+            { name: 'Purpur Block', color: '#a86cb1' },
+            { name: 'Coal Block', color: '#1a1a1a' },
+            { name: 'Iron Block', color: '#d8d8d8' },
+            { name: 'Redstone Block', color: '#990000' },
+            { name: 'Quartz Block', color: '#e5e5e0' }
+        ];
+
+        function hexToRgb(hex) {
+            const n = parseInt(hex.slice(1), 16);
+            return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+        }
+
+        function rgbToHex(r, g, b) {
+            return `#${[r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')}`;
+        }
+
+        function colorDistance(c1, c2) {
+            const r1 = parseInt(c1.substring(1, 3), 16);
+            const g1 = parseInt(c1.substring(3, 5), 16);
+            const b1 = parseInt(c1.substring(5, 7), 16);
+            const r2 = parseInt(c2.substring(1, 3), 16);
+            const g2 = parseInt(c2.substring(3, 5), 16);
+            const b2 = parseInt(c2.substring(5, 7), 16);
+            return Math.sqrt(
+                Math.pow(r1 - r2, 2) + 
+                Math.pow(g1 - g2, 2) + 
+                Math.pow(b1 - b2, 2)
+            );
+        }
+
+        function findClosestBlocks(targetColor, count = 3) {
+            return [...blocks]
+                .map(block => ({
+                    ...block,
+                    distance: colorDistance(targetColor, block.color)
+                }))
+                .sort((a, b) => a.distance - b.distance)
+                .slice(0, count);
+        }
+
+        function createGradient() {
+            const start = hexToRgb(document.getElementById('start').value);
+            const end = hexToRgb(document.getElementById('end').value);
+            const steps = Math.min(parseInt(document.getElementById('steps').value), 20);
+            const div = document.getElementById('gradient');
+            div.innerHTML = '';
+
+            for (let i = 0; i < steps; i++) {
+                const r = Math.round(start[0] + (end[0] - start[0]) * i / (steps - 1));
+                const g = Math.round(start[1] + (end[1] - start[1]) * i / (steps - 1));
+                const b = Math.round(start[2] + (end[2] - start[2]) * i / (steps - 1));
+                const color = rgbToHex(r, g, b);
+                const closestBlocks = findClosestBlocks(color, 6);
+                
+                const gradientItem = document.createElement('div');
+                gradientItem.className = 'gradient-item';
+                gradientItem.innerHTML = `
+                    <div class="color-box" style="background: ${color}"></div>
+                    <div class="hex-code">${color.toUpperCase()}</div>
+                    <div class="block-grid">
+                        ${closestBlocks.map(block => 
+                            `<div class="block-swatch" 
+                                  style="background: ${block.color}"
+                                  data-tooltip="${block.name} (${block.color})">
+                            </div>`).join('')}
+                    </div>
+                `;
+                div.appendChild(gradientItem);
+            }
+        }
+
+        // Generate initial gradient on page load
+        document.addEventListener('DOMContentLoaded', createGradient);
+        
+        // Update gradient when any input changes
+        document.getElementById('start').addEventListener('input', createGradient);
+        document.getElementById('end').addEventListener('input', createGradient);
+        document.getElementById('steps').addEventListener('change', createGradient);
+    </script>
+</body>
+</html>

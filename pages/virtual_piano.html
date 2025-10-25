@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Piano</title>
+<style>
+body { text-align: center; background: #222; color: white; font-family: sans-serif; }
+.key { display: inline-block; width: 40px; height: 200px; background: white; border: 1px solid #333; margin: 1px; border-radius: 4px; position: relative; }
+.black { width: 25px; height: 120px; background: black; position: absolute; left: 28px; top: 0; z-index: 2; }
+.key:active { background: #ccc; }
+</style>
+</head>
+<body>
+<h1>Virtual Piano</h1>
+<div id="piano"></div>
+
+
+<script>
+const notes=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+
+
+function play(freq){
+const osc=audioCtx.createOscillator();
+const gain=audioCtx.createGain();
+osc.connect(gain).connect(audioCtx.destination);
+osc.frequency.value=freq;
+osc.start();
+gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+1);
+osc.stop(audioCtx.currentTime+1);
+}
+
+
+function noteFreq(note,octave){
+const a4=440;
+const n=notes.indexOf(note)+(octave-4)*12-9;
+return a4*Math.pow(2,n/12);
+}
+
+
+const piano=document.getElementById('piano');
+for(let i=0;i<notes.length;i++){
+const key=document.createElement('div');
+key.className='key';
+key.textContent=notes[i];
+key.onclick=()=>play(noteFreq(notes[i],4));
+piano.appendChild(key);
+}
+</script>
+</body>
+</html>
