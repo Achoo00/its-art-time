@@ -34,85 +34,98 @@
         </div>
 
     <script>
-        // EDIT YOUR TASKS HERE
-        const TASKS = ["Floss",
-        "Skincare",
-        "No Pawns",
-        "Stretch",
-        "French Practice",
-        "Sleep 8hrs (11:30PM - 7:30AM)",
-        "Electric Toothbrush (at least once a day)",
-        "Read/Study/Work",
-        "Piano",
-        "Workout",
-        "Pay credit card",
-        "Rosemary Oil",
-        "Volleyball",
-        "Weekly Meeting"       
-        ];
+const TASKS = [
+    "Floss", "Skincare", "No Pawns", "Stretch", "French Practice",
+    "Sleep 8hrs (11:30PM - 7:30AM)", "Electric Toothbrush (at least once a day)",
+    "Read/Study/Work", "Piano", "Workout", "Pay credit card",
+    "Rosemary Oil", "Volleyball", "Weekly Meeting"
+];
 
-        const taskContainer = document.getElementById('task-container');
-        const historyContainer = document.getElementById('history-container');
-        const progressBar = document.getElementById('progress-bar');
-        const progressText = document.getElementById('progress-text');
-        const dateEl = document.getElementById('current-date');
+const taskContainer = document.getElementById('task-container');
+const historyContainer = document.getElementById('history-container');
+const progressBar = document.getElementById('progress-bar');
+const progressText = document.getElementById('progress-text');
+const dateEl = document.getElementById('current-date');
 
-        const today = new Date().toLocaleDateString();
-        dateEl.innerText = today;
+const today = new Date().toLocaleDateString();
+dateEl.innerText = today;
 
-        // Load data
-        let state = JSON.parse(localStorage.getItem('dailyAppState')) || { date: today, completed: [], history: [] };
+// Load data - Initial state handles history as an array of objects
+let state = JSON.parse(localStorage.getItem('dailyAppState')) || { 
+    date: today, 
+    completed: [], 
+    history: [] 
+};
 
-        // Check for Daily Reset
-        if (state.date !== today) {
-            const score = Math.round((state.completed.length / TASKS.length) * 100);
-            state.history.unshift({ date: state.date, score: score });
-            state.history = state.history.slice(0, 7); // Keep last 7 days
-            state.date = today;
-            state.completed = [];
-            save();
-        }
+// Check for Daily Reset
+if (state.date !== today) {
+    const score = Math.round((state.completed.length / TASKS.length) * 100);
+    
+    // Save the actual task names into the history object
+    state.history.unshift({ 
+        date: state.date, 
+        score: score,
+        tasks: [...state.completed] // Store a copy of completed tasks
+    });
+    
+    state.history = state.history.slice(0, 7); // Keep last 7 days
+    state.date = today;
+    state.completed = [];
+    save();
+}
 
-        function save() {
-            localStorage.setItem('dailyAppState', JSON.stringify(state));
-            render();
-        }
+function save() {
+    localStorage.setItem('dailyAppState', JSON.stringify(state));
+    render();
+}
 
-        function toggleTask(task) {
-            if (state.completed.includes(task)) {
-                state.completed = state.completed.filter(t => t !== task);
-            } else {
-                state.completed.push(task);
-            }
-            save();
-        }
+function toggleTask(task) {
+    if (state.completed.includes(task)) {
+        state.completed = state.completed.filter(t => t !== task);
+    } else {
+        state.completed.push(task);
+    }
+    save();
+}
 
-        function render() {
-            // Render Tasks
-            taskContainer.innerHTML = TASKS.map(task => `
-                <div class="flex items-center gap-4 bg-gray-800 p-4 rounded-lg">
-                    <input type="checkbox" class="checkbox-custom" 
-                        ${state.completed.includes(task) ? 'checked' : ''} 
-                        onclick="toggleTask('${task}')">
-                    <span class="${state.completed.includes(task) ? 'line-through text-gray-500' : ''}">${task}</span>
-                </div>
-            `).join('');
+// Helper to toggle visibility of historical tasks
+function toggleHistoryDetails(index) {
+    const el = document.getElementById(`details-${index}`);
+    el.classList.toggle('hidden');
+}
 
-            // Update Progress
-            const pct = Math.round((state.completed.length / TASKS.length) * 100) || 0;
-            progressBar.value = pct;
-            progressText.innerText = `${pct}%`;
+function render() {
+    // Render Current Tasks
+    taskContainer.innerHTML = TASKS.map(task => `
+        <div class="flex items-center gap-4 bg-gray-800 p-4 rounded-lg">
+            <input type="checkbox" class="checkbox-custom" 
+                ${state.completed.includes(task) ? 'checked' : ''} 
+                onclick="toggleTask('${task}')">
+            <span class="${state.completed.includes(task) ? 'line-through text-gray-500' : ''}">${task}</span>
+        </div>
+    `).join('');
 
-            // Render History
-            historyContainer.innerHTML = state.history.map(h => `
-                <div class="flex justify-between border-b border-gray-800 pb-1">
-                    <span>${h.date}</span>
-                    <span class="font-mono">${h.score}%</span>
-                </div>
-            `).join('');
-        }
+    // Update Progress Bar
+    const pct = Math.round((state.completed.length / TASKS.length) * 100) || 0;
+    progressBar.value = pct;
+    progressText.innerText = `${pct}%`;
 
-        render();
-    </script>
+    // Render History with Task Lists
+    historyContainer.innerHTML = state.history.map((h, index) => `
+        <div class="border-b border-gray-800 pb-2 mb-2">
+            <div class="flex justify-between items-center cursor-pointer" onclick="toggleHistoryDetails(${index})">
+                <span>${h.date} <span class="text-[10px] text-blue-400 ml-2">VIEW</span></span>
+                <span class="font-mono ${h.score === 100 ? 'text-green-400' : ''}">${h.score}%</span>
+            </div>
+            <div id="details-index-${index}" id="details-${index}" class="hidden mt-2 pl-2 border-l border-gray-700">
+                ${h.tasks && h.tasks.length > 0 
+                    ? h.tasks.map(t => `<div class="text-xs text-gray-500">✓ ${t}</div>`).join('')
+                    : '<div class="text-xs italic text-gray-600">No tasks completed</div>'}
+            </div>
+        </div>
+    `).join('');
+}
+render();
+</script>
 </body>
 </html>
